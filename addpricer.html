@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pricer application">
+    <meta name="author" content="sky">
+
+    <title>AddPricer. Easy repricing. Data mining and web scraping tool.</title>
+
+    <script src="https://use.fontawesome.com/818d94916d.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <link href="css/add-gears.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+            <a href="index.html" style="float:left;padding: 0 10px;"><img class="img-responsive" src="logo.png"></a>
+            <a class="navbar-brand" href="index.html">AddPricer</a>
+        </div>
+
+        
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="download.html">Download</a></li>
+                <li><a href="http://docs.addgears.com">Documentation</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="terms.html">Terms</a></li>
+                <li><a href="contacts.html">Contact</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    
+</nav>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.3.0/styles/default.min.css">
+<div class="section"><div class="container">
+<h1>AddPricer: AddGears components for data-mining and repricing</h1>
+
+<p>Competitive pricing is the key to achieving sustained sales growth. At first glance
+simple, repricing poses many challenges. Complexity comes from the need to perform
+many operations: data collection from multiple sources, analyses, historical data
+storage, etc. To make things worse you also need to adopt to constantly changing
+environment and to be able to explore new possibilities promptly.</p>
+
+<p>For example, on Amazon many books listings change
+daily and even more frequently. And if for a few products it is feasible to tweak your
+ prices manually, as the number of products increases, this procedure becomes
+too tedious and begs for automation.</p>
+
+<p>As always, possible solutions range from writing your own software from scratch
+to buying ready available comprehensive software suits. Out of the box software
+solutions tend to be both pretty restrictive and, in the same time,
+full of screens, dialogs and numerous unused options.
+In-house software development also comes with its
+own set of problems to work through: it could be costly and it is always an
+interactive process, involving trial and error learning.</p>
+
+<p>Where in this picture fits AddPricer? It is different as it first of all aims to
+provide a set of useful tools, a set of Lego blocks, not a comprehensive black
+box solution. It builds on top of AddGears adding a few components to harvest and
+scape data from HTML.</p>
+
+<p>AddGears comes with a few configurable and easily reusable components and general
+ecosystem of makefiles, configuration files and templates, providing a framework
+to combine and build new reusable blocks and flexible enterprise solutions on
+top of them. It turns out that to achieve many goals
+we don&rsquo;t necessarily need to write a code. Flexible configuration system, templates, SQL
+and little bit of scripting is often more then enough to solve many real world problems.</p>
+
+<p>AddPricer adheres to the AddGears philosophy and aims to provide a tool useful
+to a broad business community, without loosing its main focus on repricing.
+We think that competitive pricing first of all implies data acquisition and some
+number crunching, for which special components are provided. And a natural synergy
+with AddGears results in a functionality that makes it able to manage a complete
+business data flow: web harvesting, database import\export, file operations, HTTP
+endpoints - many ingredients that help business to be highly competitive and efficient.</p>
+
+<p>To make for flexibility AddPricer stops short of providing any web interface though.
+Just leaving user with all the tools necessary. It seems like a good text editor
+is actually the best user interface for data processing. Textual information is
+both easy for humans to digest and convenient to share data between applications (think of SQL
+databases, spreadsheets, third party software etc). Any GUI on the other hand immediately
+imposes limitations and should be used wisely. When you do need some UI - to give
+it to your customers or as a tool to support business operations - AddGears comes with
+simple components which allow users to create database backed web servers.</p>
+
+<p><a href="installation.html">Installation</a></p>
+
+</div></div>
+<script src="//cdn.jsdelivr.net/highlight.js/9.3.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+
+<script src="js/modern-business.js"></script>
+
+
+</body>
+
+</html>
+
+

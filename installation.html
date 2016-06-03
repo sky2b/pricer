@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pricer application">
+    <meta name="author" content="sky">
+
+    <title>Installation.</title>
+
+    <script src="https://use.fontawesome.com/818d94916d.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <link href="css/add-gears.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+            <a href="index.html" style="float:left;padding: 0 10px;"><img class="img-responsive" src="logo.png"></a>
+            <a class="navbar-brand" href="index.html">AddPricer</a>
+        </div>
+
+        
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="download.html">Download</a></li>
+                <li><a href="http://docs.addgears.com">Documentation</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="terms.html">Terms</a></li>
+                <li><a href="contacts.html">Contact</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    
+</nav>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.3.0/styles/default.min.css">
+<div class="section"><div class="container">
+<h1>Installation</h1>
+
+<p><a href="download.html">Download</a> an installation package for your operating system.
+For Linux and Mac it comes as a tar archive containing <em>xpricer</em> executable and
+example projects. Windows installer adds application directory to the <em>PATH</em>
+variable making <em>xpricer</em> available anywhere at the command prompt. It also
+creates a desktop shortcut (which opens the
+command prompt in <em>projects</em> directory) and adds shortcuts in the Start
+menu (including the one which opens the projects directory in Explorer).</p>
+
+<p>After the installation is finished test it. At the command prompt type:</p>
+
+<pre><code class="language-bash">xpricer -h
+
+-config string
+      makefile name (default &quot;xmake.yaml&quot;)
+-run string
+      task to run (default &quot;default&quot;)
+</code></pre>
+
+<p>As you can see, although, technically, <em>AddPricer</em> is a command line application,
+there are only two options available. One is to specify a configuration file and
+another - task(s) to execute. The application actually is mainly
+controlled through configuration files. To work with these configuration files
+you may wish to install some editor, for example open source <a href="https://atom.io/">Atom</a>.
+As always when working with textual files,
+it is advisable to use some version control system, for example <em>git</em>, optionally
+with some GUI client, for example, with
+free <a href="https://www.sourcetreeapp.com/">SourceTree for Windows/Mac </a>.
+On Windows you may wish to install nicer
+console instead of standard command prompt, for example <a href="http://cmder.net/">cmder</a>
+with tabbed interface and better clipboard support. Also feel free to copy example
+configuration files
+in your working directory - as long as <em>xpricer</em> is present in your <em>PATH</em> you
+may work in any directory you like.</p>
+
+</div></div>
+<script src="//cdn.jsdelivr.net/highlight.js/9.3.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+
+<script src="js/modern-business.js"></script>
+
+
+</body>
+
+</html>
+
+
