@@ -56,57 +56,124 @@
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.3.0/styles/default.min.css">
 <div class="section"><div class="container">
-<h1>AddPricer: AddGears components for data-mining and repricing</h1>
+<h2>Repricing and data mining</h2>
 
 <p>Competitive pricing is the key to achieving sustained sales growth. At first glance
 simple, repricing poses many challenges. Complexity comes from the need to perform
-many operations: data collection from multiple sources, analyses, historical data
+many operations: data mining from multiple sources, analyses, historical data
 storage, etc. To make things worse you also need to adopt to constantly changing
 environment and to be able to explore new possibilities promptly.</p>
 
-<p>For example, on Amazon many books listings change
-daily and even more frequently. And if for a few products it is feasible to tweak your
+<p>On Amazon, for example, many listings change
+daily. And if for a few products it is feasible to tweak
  prices manually, as the number of products increases, this procedure becomes
 too tedious and begs for automation.</p>
 
-<p>As always, possible solutions range from writing your own software from scratch
-to buying ready available comprehensive software suits. Out of the box software
+<p>As always, when dealing with tasks which are complex and diverse in their nature,
+it is hard to come with one fits all solution. Comprehensive out of the box software
 solutions tend to be both pretty restrictive and, in the same time,
 full of screens, dialogs and numerous unused options.
 In-house software development also comes with its
 own set of problems to work through: it could be costly and it is always an
-interactive process, involving trial and error learning.</p>
+interactive process, involving trial and error learning. AddPricer is somewhere in between -
+it is a collection of ready available functional blocks designed with
+interoperability in mind.</p>
 
-<p>Where in this picture fits AddPricer? It is different as it first of all aims to
-provide a set of useful tools, a set of Lego blocks, not a comprehensive black
-box solution. It builds on top of AddGears adding a few components to harvest and
-scape data from HTML.</p>
+<h2>AddGears components for data-mining and repricing</h2>
 
-<p>AddGears comes with a few configurable and easily reusable components and general
-ecosystem of makefiles, configuration files and templates, providing a framework
-to combine and build new reusable blocks and flexible enterprise solutions on
-top of them. It turns out that to achieve many goals
-we don&rsquo;t necessarily need to write a code. Flexible configuration system, templates, SQL
-and little bit of scripting is often more then enough to solve many real world problems.</p>
+<p>Built on top of <a href="http://addgears.com/addgears.html">AddGears</a>, AddPricer provides components
+for declarative data harvesting and extraction. Every component performs some specific operation
+and could be configured using
+XML. For example, <code>&lt;scraper&gt;</code> component parses HTML page and could be instructed to
+select particular DOM elements and take text or attribute value.
+Just using CSS selectors and a <code>&lt;number&gt;</code> filter, someone can configure component to
+extract prices from Amazon listings page:</p>
 
-<p>AddPricer adheres to the AddGears philosophy and aims to provide a tool useful
-to a broad business community, without loosing its main focus on repricing.
-We think that competitive pricing first of all implies data acquisition and some
-number crunching, for which special components are provided. And a natural synergy
-with AddGears results in a functionality that makes it able to manage a complete
-business data flow: web harvesting, database import\export, file operations, HTTP
-endpoints - many ingredients that help business to be highly competitive and efficient.</p>
+<pre><code class="language-xml">&lt;scraper path=&quot;body&quot; to=&quot;item.listing&quot;&gt;
+    &lt;property selector=&quot;.olpOffer&quot; first=&quot;true&quot;&gt;
+        &lt;property name=&quot;price&quot; selector=&quot;.olpOfferPrice&quot;&gt;
+            &lt;number/&gt;
+        &lt;/property&gt;
+    &lt;/property&gt;
+&lt;/scraper&gt;
+</code></pre>
 
-<p>To make for flexibility AddPricer stops short of providing any web interface though.
-Just leaving user with all the tools necessary. It seems like a good text editor
-is actually the best user interface for data processing. Textual information is
-both easy for humans to digest and convenient to share data between applications (think of SQL
-databases, spreadsheets, third party software etc). Any GUI on the other hand immediately
-imposes limitations and should be used wisely. When you do need some UI - to give
-it to your customers or as a tool to support business operations - AddGears comes with
-simple components which allow users to create database backed web servers.</p>
+<p>Another <code>&lt;harvester&gt;</code> <a href="http://docs.addgears.com/webcrawler.html">component</a> can be used
+to crawl web pages (with page caching, proxies and anonymous crawling via Tor network).</p>
 
-<p><a href="installation.html">Installation</a></p>
+<p>All components execute in the context of the execution <em>namespace</em> - shared data tree where
+components can get/store data, thus communicating with each other. In the example above,
+the <code>body</code> variable should contain an HTML page
+content, and an extracted price object is stored in the namespace, in a <code>listing</code> property
+of the <code>item</code> object.</p>
+
+<p>In addition to these useful components, AddPricer has a full access to all the
+functionality of AddGears:
+configurable components (SQL, file IO, client/server HTTP,
+built-in scripting language, etc)
+and ecosystem in general, including <a href="http://docs.addgears.com/makefiles.html">makefiles</a>.</p>
+
+<p>Makefiles are an ideal tool when someone wants to split and combine
+complex operations:</p>
+
+<pre><code class="language-yaml"># a makefile target which reads a *.csv file and stores it in a &quot;data&quot; namespace variable
+read-file:
+    params:
+        file: products.csv
+    run: read-file.xml
+    config: configuration/*.xml
+
+# a makefile target which prints &quot;data&quot; namespace variable
+print-data:
+    run: print-data.xml
+    config: configuration/*.xml
+
+# a makefile target which harvests HTML pages for products in &quot;data&quot; namespace variable
+harvest:
+    run: harvest.xml
+    config: configuration/*.xml
+
+# a makefile target which scrapes HTML pages to extract pricing information
+scrape:
+    run: scrape.xml
+    config: configuration/*.xml
+
+# a makefile target which updates prices in MySQL table
+update:
+    run: update.xml
+    config: configuration/*.xml
+
+# a compound target, combining multiple targets defined before
+all:
+    - read-file
+    - print-data
+    - harvest
+    - scrape
+    - print-data
+    - update
+</code></pre>
+
+<p>Taking advantage of a shared namespace and using consistent naming conventions, its
+easy to divide complex tasks into small elementary steps which could be separately tested,
+and then reused in various scenarios. Different targets could be combined and invoked from
+command line. To make for flexibility AddPricer stops short of providing finished web application,
+providing all the tools and example HTML pages. So that when necessary repricing could be wrapped into an
+REST API using handy AddGears HTTP handler component.</p>
+
+<h2>Where to go next</h2>
+
+<p>All components and there attributes are <a href="http://docs.addgears.com/docs/api.html">documented</a>.
+In addition AddGears comes with
+examples and step by step <a href="http://docs.addgears.com/getting-started.html">tutorial</a>.
+This tutorial shows how to solve practical everyday problems: harvest and scrape HTML pages,
+create HTTP API endpoints, perform file IO and MySQL data retrieval, etc.</p>
+
+<p>AddPricer is not bound to any server or cloud platform. It
+could be <a href="http://pricer.addgears.com/download.html">downloaded</a><br />
+and used it on premises (see also <a href="installation.html">installation</a> instructions),
+along with practically any technology stack.
+Or we can <a href="http://pricer.addgears.com/pricing.html">install, support and develop</a> AddPricer
+based applications for you.</p>
 
 </div></div>
 <script src="//cdn.jsdelivr.net/highlight.js/9.3.0/highlight.min.js"></script>
